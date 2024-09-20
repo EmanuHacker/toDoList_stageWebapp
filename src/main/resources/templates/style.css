@@ -1,0 +1,48 @@
+/* CSS */
+
+center{
+	padding: 100px;
+}
+
+h3, p{
+	padding: 0px 70px;
+	text-align: justify;
+}
+
+div>h3, div>h4{
+	text-align: center;
+}
+
+th button{
+	width: 100%;
+}
+
+span button{
+	height: 100%;
+}
+
+#principal_card{
+	border: 2.5px solid #C7C7C7;
+	padding: 5px;
+}
+
+#activity_description_setting_for_user, #activity_description_for_user{
+	border: 1px solid black;
+	min-height: 100px;
+}
+
+#principal_div{
+	min-width: 90%;
+}
+
+table{
+	text-align: center;
+}
+
+th{
+	font-weight: normal;
+}
+
+#input_name, #set_activity_repository, #add_activity_repository{
+	display: none;
+}

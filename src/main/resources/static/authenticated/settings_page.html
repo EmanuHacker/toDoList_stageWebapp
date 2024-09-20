@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<head>
+		<title>Verso il sito degli 1</title>
+		
+		<!--
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+		-->
+		
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+		<link href="http://localhost:8082/style.css" rel="stylesheet" type="text/css">
+		<link href="http://localhost:8082/style_settings.css" rel="stylesheet" type="text/css">
+		<link href="http://localhost:8082/style_registration.css" rel="stylesheet" type="text/css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+		
+		<script>
+			function modifyUser(rowId, isOwner){
+				document.getElementById("modify_user"+rowId).style.display = "none";
+				document.getElementById("expel_user"+rowId).style.display = "block";
+				if(isOwner){
+					document.getElementById("show_role"+rowId).style.display = "none";
+					document.getElementById("change_user_role"+rowId).style.display = "block";
+				}
+			}
+			
+			function goToActivities(){
+				document.getElementById("buttons_for_users").style.display = "none";
+				document.getElementById("buttons_for_activities").style.display = "block";
+				document.getElementById("users_table").style.display = "none";
+				document.getElementById("activities_table").style.display = "block";
+			}
+			
+			function goToUsers(){
+				document.getElementById("buttons_for_users").style.display = "block";
+				document.getElementById("buttons_for_activities").style.display = "none";
+				document.getElementById("users_table").style.display = "block";
+				document.getElementById("activities_table").style.display = "none";
+			}
+			
+			function changeOwner(){
+				document.getElementById("owner_change_form").style.display = "block";
+				document.getElementById("owner_change_button").style.display = "none";
+			}
+			
+			function assignOldActivity(activityText, activityPriority, activityDescription){
+				document.getElementById("add_activity_form").style.display = "block";
+				document.getElementById("testo").value = activityText;
+				document.getElementById("priorita").value = activityPriority;
+				document.getElementById("descrizione").value = activityDescription;
+			}
+			
+			function openNav() {
+			  document.getElementById("dm_sidebar").style.width = "250px";
+			  document.getElementById("main_sidebar").style.marginLeft = "250px";
+			  document.getElementById("container_box").style.marginLeft = "270px";
+			}
+
+			function closeNav() {
+			  document.getElementById("dm_sidebar").style.width = "0";
+			  document.getElementById("main_sidebar").style.marginLeft = "0";
+			  document.getElementById("container_box").style.margin = "auto";
+			} 
+		</script>
+		
+		<script>
+			$(document).ready(function(){
+			  $('[data-toggle="popover"]').popover();   
+			});
+		</script>
+	</head>
+	
+	
+	<body onload="${show_navbar}$">
+	
+		<div>
+			<div class="sidebar" id="dm_sidebar">
+			  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			  <ul>
+				${all_messages}$
+			  </ul>
+			</div>
+
+			<div id="main_sidebar">
+			  <button class="openbtn" onclick="openNav()"><img src="/mail_icon.png" /></button>
+			  <!--
+				  <h2>Collapsed Sidebar</h2>
+				  <p>Content...</p>
+				-->
+			</div>
+		</div>
+		
+		<div class="container_box">
+		
+			<div class="container py-5 h-100">
+				<div class="row d-flex justify-content-center align-items-center h-100">
+					<div id="principal_div">
+						<div class="card rounded-3" id="principal_card">
+						
+							<p style="width: 100%; padding: 0px;">
+								<span style="float: left; padding: 2px;">
+									<a href="/authenticated/"><img src="/exit.png" /></a>
+								</span>
+							</p>
+							
+							<h2 class="text-center my-3 pb-3">
+								<b>${name}$</b> (${role}$)
+								<div ${change_owner}$>
+									<br>
+									<button type="button" onclick="changeOwner()" class="btn btn-outline-info register_button" id="owner_change_button">Cambia proprietario</button>
+									<br>
+								</div>
+							</h2>
+							<form action="/auth/changeUserRole" method="POST" id="owner_change_form" style="display: none; text-align: center;">
+								<input type="hidden" name="role" value="${owner_default_string}$" />
+								Nuovo proprietario:
+								<select name="name">
+									${all_users}$
+								</select>
+								<br><br>
+								<button type="submit" class="btn btn-outline-info">Conferma</button>
+								<button type="button" onclick="window.location.reload()" class="btn btn-outline-secondary">Annulla</button>
+							</form>
+							<hr>
+							
+							<div>
+							
+								<div style="text-align: center;">
+									<div id="buttons_for_users">
+										<button type="button" class="btn btn-info register_button">Utenti</button>
+										&nbsp;&nbsp;
+										<button type="button" onclick="goToActivities()" class="btn btn-outline-info register_button">Attività</button>
+									</div>
+									
+									<div id="buttons_for_activities" style="display: none;">
+										<button type="button" onclick="goToUsers()" class="btn btn-outline-info register_button">Utenti</button>
+										&nbsp;&nbsp;
+										<button type="button" class="btn btn-info register_button">Attività</button>
+									</div>
+									
+									<br>
+								</div>
+								
+								<div id="users_table">
+									<table class="table mb-4">
+									
+										<tr>
+											<th><b>Nome</b></th>
+											<th><b>E-mail</b></th>
+											<th><b>Ruolo</b></th>
+											<th><b>Cose da fare</th></b>
+											<th></th>
+										<tr>
+										
+										${users}$
+										
+									</table>
+								</div>
+								
+								<div id="activities_table" style="display: none;">
+									<table class="table mb-4">
+									
+										<tr>
+											<th><b>Cosa fare</b></th>
+											<th><b>Priorità</b></th>
+											<th><b>Assegnata</b></th>
+											<th><b>Proprietario</b></th>
+											<th></th>
+											<th></th>
+										<tr>
+										
+										${activities}$
+										
+									</table>
+									
+									<form id="add_activity_form" class="px-md-2" method="post" action="/auth/addActivityForAdmin" style="display: none;">
+										<input type="text" name="testo" id="testo" readonly />
+										<input type="hidden" name="priorita" id="priorita" />
+										<input type="hidden" name="descrizione" id="descrizione" />
+										
+										<select name="name">
+											<option value=":tutti:">Tutti</option>
+											${all_users}$
+										</select>
+										
+										<button type="submit" class="btn btn-outline-info">Conferma</button>
+										<button type="button" onclick="window.location.reload()" class="btn btn-outline-secondary">Annulla</button>
+									</form>
+								</div>
+								
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	
+</html>

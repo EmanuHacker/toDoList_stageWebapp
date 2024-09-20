@@ -1,0 +1,25 @@
+body{
+	background-color: #8fc4b7;
+}
+
+label{
+	font-weight: bold;
+}
+
+input{
+	text-align: center;
+}
+
+.input_elements{
+	width: 65%;
+}
+
+.register_button{
+	width: 27%;
+}
+
+@media (min-width: 1025px) {
+	.h-custom {
+		height: 100vh !important;
+	}
+}

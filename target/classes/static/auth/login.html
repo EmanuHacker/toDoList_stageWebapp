@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>Log in</title>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+		<link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" integrity="sha384-oOE/3m0LUMPub4kaC09mrdEhIc+e3exm4xOGxAmuFXhBNF4hcg/6MiAXAf5p0P56" crossorigin="anonymous"/>
+	</head>
+	<body>
+		<div class="container">
+		  <form class="form-signin" method="post" action="/auth/login">
+			<h2 class="form-signin-heading">Log in</h2>
+			<p>
+			  <label for="name" class="sr-only">Username</label>
+			  <input type="text" id="name" name="name" class="form-control" placeholder="Username" required autofocus>
+			</p>
+			<p>
+			  <label for="pswd" class="sr-only">Password</label>
+			  <input type="password" id="pswd" name="pswd" class="form-control" placeholder="Password" required>
+			</p>
+			<!-- <input name="_csrf" type="hidden" value="270zvcG_LGMy4jwDk5EPqqvNgXD5BiEtuiLnAswRJUHJv2AyvowKi_ONSgUfgwlhorw7y5n-rBLPY0MAgxLTYf53F3CojVMB" /> -->
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+		  </form>
+		</div>
+	</body>
+</html>
+
+<!--
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+	<head>
+		<title>Please Log In</title>
+	</head>
+	<body>
+		<h1>Please Log In</h1>
+		<div th:if="${param.error}">
+			Invalid username and password.</div>
+		<div th:if="${param.logout}">
+			You have been logged out.</div>
+		<form th:action="@{/login}" method="post">
+			<div>
+				<input type="text" name="th:name" placeholder="Username"/>
+			</div>
+			<div>
+				<input type="password" name="th:pswd" placeholder="Password"/>
+			</div>
+			<input type="submit" value="Log in" />
+		</form>
+		Nuovo? <a href="/registration.html">Registrati ora</a>
+	</body>
+</html>
+-->
+

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<head>
+		<title>Verso il sito degli 1</title>
+		
+		<!--
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		-->
+		
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+		<link href="http://localhost:8082/style.css" rel="stylesheet" type="text/css">
+		<link href="http://localhost:8082/style_registration.css" rel="stylesheet" type="text/css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
+		
+		<script>
+			function showAddActivityForm(){
+				document.getElementById("add_activity_repository").style.display = "block";
+				document.getElementById("show_addActivityForm_button").style.display = "none";
+				$('#activity_description_for_user').summernote('code', "Nessuna descrizione");
+			}
+			
+			function assign(){
+				document.getElementById("new_activity_button").innerHTML = "Assegna";
+				document.getElementById("assigment_button").style.display = "none";
+				document.getElementById("input_name").style.display = "block";
+			}
+			
+			function assignOldActivity(activityText, activityPriority, activityDescription){
+				showAddActivityForm();
+				document.getElementById("add_activity_repository").style.display = "block";
+				document.getElementById("set_activity_repository").style.display = "none";
+				document.getElementById("activity_text").value = activityText;
+				$('#activity_description_for_user').summernote('code', activityDescription);
+				document.getElementById("activity_priority").value = activityPriority;
+				assign();
+			}
+			
+			function submitActivityForm(){
+				document.getElementById("activity_description").value = $("#activity_description_for_user").summernote('code');
+				document.getElementById("add_activity_form").submit();
+			}
+			
+			function startSettingActivity(activityId, activityText, activityPriority, activityDescription){
+				showAddActivityForm();
+				console.log(activityDescription);
+				document.getElementById("activity_id_setting").value = activityId;
+				document.getElementById("activity_text_setting").value = activityText;
+				document.getElementById("activity_priority_setting").value = activityPriority;
+				//$('#activity_description_setting_for_user').summernote('editor.insertText', activityDescription));
+				$('#activity_description_setting_for_user').summernote('code', activityDescription);
+				document.getElementById("add_activity_repository").style.display = "none";
+				document.getElementById("set_activity_repository").style.display = "block";
+			}
+			
+			function endSettingActivity(){
+				document.getElementById("activity_description_setting").value = $("#activity_description_setting_for_user").summernote('code');
+				document.getElementById("set_activity_form").submit();
+			}
+			
+			function ownerRemoveActivity(rowNumber){
+				document.getElementById("pre_elimination_button"+rowNumber).style.display = "none";
+				document.getElementById("assegnation_button"+rowNumber).style.display = "none";
+				document.getElementById("modification_button"+rowNumber).style.display = "none";
+				document.getElementById("elimination_form"+rowNumber).style.display = "block";
+				document.getElementById("reload_for_elimination"+rowNumber).style.display = "block";
+			}
+		</script>
+		
+		<script>
+			$(document).ready(function(){
+			  $('[data-toggle="popover"]').popover();   
+			});
+		</script>
+		
+		<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+	</head>
+	
+	<body>
+	
+		<div class="container_box">
+		
+			<div class="container py-5 h-100">
+				<div class="row d-flex justify-content-center align-items-center h-100">
+					<div id="principal_div"> <!-- class="col col-lg-9 col-xl-7" -->
+						<div class="card rounded-3" id="principal_card">
+						
+							<p style="width: 100%; padding: 0px;">
+								<span style="float: left; padding: 2px;">
+									<a href="/authenticated/settings"><img src="/settings.png" /></a>
+								</span>
+								
+								<span style="float: right; padding: 2px;">
+									<a href="/authenticated/profile"><button type="button" class="btn btn-outline-info">Cambia password</button></a>
+									<a href="/auth/logout"><button type="button" class="btn btn-outline-info">Logout</button></a>
+								</span>
+							</p>
+							
+							<h2 class="text-center my-3 pb-3">
+								Buongiorno ${name}$! <br>
+								<a href="https://enciclopediadegliuno.altervista.org" target="_blank">Premi qui</a> per vedere il sito degli 1!
+							</h2>
+							<hr>
+							
+							<div class="card-body p-4">
+								
+								<div>
+									<h3>Attività che devi svolgere</h3>
+									<table class="table mb-4">
+									
+										<tr>
+											<th><b>Cosa fare</b></th>
+											<th><b>Priorità</b></th>
+											<th><b>Proprietario</b></th>
+											<th></th>
+											<th></th>
+										<tr>
+										
+										${activity}$
+										
+									</table>
+										
+								</div>
+								<hr><br>
+								
+								<div>
+									<h3>Attività di cui sei proprietario</h3>
+									<table class="table mb-4">
+									
+										<tr>
+											<th><b>Cosa fare</b></th>
+											<th><b>Priorità</b></th>
+											<th><b>Assegnata</b></th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th></th>
+										<tr>
+										
+										${my_activity}$
+										
+									</table>
+										
+								</div>
+								<hr><br>
+								
+								<!-- 
+								<div>
+								  <h3>Popover Example</h3> 
+								  <a data-toggle="popover" title="Popover Header" data-content="Some content inside the popover">Toggle popover</a>
+								</div>
+								-->
+								
+								<button type="button" onclick="showAddActivityForm()" class="btn btn-outline-info btn-block" id="show_addActivityForm_button">Aggiungi attività</button>
+								
+								<div id="add_activity_repository">
+								
+									<h4>Aggiungi attività</h4>
+									
+									<form class="px-md-2" method="post" action="/auth/addActivity" id="add_activity_form">
+										
+										<div data-mdb-input-init class="mb-4">
+											<label class="form-label" for="testo">Cosa da fare: </label><br>
+											<input type="text" name="testo" id="activity_text" />
+										</div>
+										
+										<div data-mdb-input-init class="mb-4">
+											<label class="form-label" for="descrizione">Descrizione: </label><br>
+											
+											<div contenteditable="true" id="activity_description_for_user">
+											</div>
+											<script>
+												$(document).ready(function() {
+													$('#activity_description_for_user').summernote();
+												});
+											</script>
+											
+											<input type="hidden" name="descrizione" id="activity_description" />
+										</div>
+										
+										<div data-mdb-input-init class="mb-4">
+											<label class="form-label" for="priorita">Priorità: </label><br>
+											<select name="priorita" id="activity_priority">
+												<option value="${no_priority}$" selected >${no_priority}$</option>
+												<option value="${low_priority}$">${low_priority}$</option>
+												<option value="${medium_priority}$">${medium_priority}$</option>
+												<option value="${high_priority}$">${high_priority}$</option>
+												<option value="${max_priority}$">${max_priority}$</option>
+											</select>
+											<br>
+										</div>
+										
+										<div id="input_name">
+											<span>Da assegnare a: </span>
+											<select name="name">
+												<option value=":tutti:">Tutti</option>
+												${all_users}$
+											</select>
+											<br>
+										</div>
+										
+										<br>
+										
+										<button type="button" onclick="submitActivityForm()" class="btn btn-outline-primary" id="new_activity_button">Salva</button>
+										<button type="button" class="btn btn-outline-info" id="assigment_button" onclick="assign()"${assign_button_style}$>Assegna</button>
+										<button type="button" class="btn btn-outline-secondary" onclick="window.location.reload()">Annulla</button>
+										<br><br>
+									</form>
+									
+								</div>
+								
+								<div id="set_activity_repository">
+								
+									<h4>Modifica attività</h4>
+									
+									<form class="px-md-2" method="post" action="/auth/setActivity" id="set_activity_form">
+									
+										<input type="hidden" name="identificatore" id="activity_id_setting" />
+										
+										<div data-mdb-input-init class="mb-4">
+											<label class="form-label" for="testo">Cosa da fare: </label><br>
+											<input type="text" name="testo" id="activity_text_setting" />
+										</div>
+										
+										<div data-mdb-input-init class="mb-4">
+											<label class="form-label" for="descrizione">Descrizione: </label><br>
+											
+											<div contenteditable="true" id="activity_description_setting_for_user">
+											</div>
+											<script>
+												$(document).ready(function() {
+													$('#activity_description_setting_for_user').summernote();
+												});
+											</script>
+											
+											<input type="hidden" name="descrizione" id="activity_description_setting" />
+										</div>
+										
+										<div data-mdb-input-init class="mb-4">
+											<label class="form-label" for="priorita">Priorità: </label><br>
+											<select name="priorita" id="activity_priority_setting">
+												<option value="${no_priority}$">${no_priority}$</option>
+												<option value="${low_priority}$">${low_priority}$</option>
+												<option value="${medium_priority}$">${medium_priority}$</option>
+												<option value="${high_priority}$">${high_priority}$</option>
+												<option value="${max_priority}$">${max_priority}$</option>
+											</select>
+											<br>
+										</div>
+										
+										<button type="button" onclick="endSettingActivity()" class="btn btn-outline-info">Salva</button> <!--  id="set_activity_button" -->
+										<button type="button" class="btn btn-outline-secondary" onclick="window.location.reload()">Annulla</button>
+										<br><br>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</body>
+	
+</html>

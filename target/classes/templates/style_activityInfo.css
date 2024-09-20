@@ -1,0 +1,21 @@
+/* CSS */
+
+#messages_form{
+	max-height: 250px;
+	overflow-y:scroll;
+}
+
+#principal_div{
+	padding: 10px;
+}
+
+.message_div{
+	max-width: 95%;
+	position: relative;
+}
+
+form > div{
+	width: 100%; 
+	vertical-align: middle;
+	padding: 5px;
+}
